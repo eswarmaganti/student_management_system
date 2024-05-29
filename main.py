@@ -98,6 +98,42 @@ def print_all_students_details():
         print(f"Aadhar: {student.get('aadhar')}")
         print(f"Class: {student.get('class')}")
 
+
+# function to update student details
+def update_student_details():
+    admission_number = input("Enter student admission number: ")
+
+    # TODO: validate the admission number 
+
+
+    # fetching student details from student_data
+    student = students_data.get(admission_number)
+
+    # for student personal details
+    while True:
+        choice = input("If you want to update Student Personal details (Y/N): ")
+        if choice == 'N':
+            break
+
+        print("name, dob, aadhar, caste, ..")
+        field_name = input("Enter the filed you want to update: ")
+        filed_value = input("Enter the filed value: ")
+        student[field_name] = filed_value
+        print('The student details updated successfully\n')
+    
+    # TODO: For student address details
+    #student['address'][field_name] = filed_value
+    # TODO: For Student Father Details
+    #student['parents_details']['father'][field_name] = filed_value
+    # Todo: For Student Mother Details
+
+    # update the main student_data with current updated student
+    students_data[admission_number] = student
+    
+    # update the student_data to json file
+    with open('data/student_data.json','w+') as stream:
+        json.dump(students_data,stream)
+
 # main starts here
 if __name__ == "__main__":
     # load existing student data
@@ -121,6 +157,6 @@ if __name__ == "__main__":
     elif choice == 3:
         print_all_students_details()
     elif choice == 4:
-        pass
+        update_student_details()
     else:
         print("*** Error: Invalid choice entered as input ***")
